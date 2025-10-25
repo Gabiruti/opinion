@@ -16,7 +16,7 @@ export default async function TimeLine() {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4 p-2 container mx-auto items-start h-auto">
+      <div className="grid grid-cols-2 gap-4 p-2 container items-start max-w-288 h-auto">
         {topics
           ? topics.map((topic, index) => (
               <Topic
