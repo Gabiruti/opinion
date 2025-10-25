@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ui/theme-provider";
+import SideMenu from "@/components/side-menu/SideMenu";
+import Image from "next/image";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +26,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-hidden`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div>
+            <header className="flex justify-center p-3">
+              <Image
+                src="/logo.svg"
+                width={40}
+                height={40}
+                alt="Opinion logo."
+                className="self-center"
+              />
+            </header>
+            <div className="flex gap-5">
+              <SideMenu />
+              <main className="flex-1 h-screen p-5 border-l-1 border-r-1 border-t-1 max-w-[1200px]">
+                {children}
+              </main>
+            </div>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
